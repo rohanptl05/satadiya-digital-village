@@ -19,19 +19,45 @@ import { useState } from "react";
 import Modal from "./Modal";
 
 const components = [
-  { title: "Alert Dialog", href: "/docs/primitives/alert-dialog", description: "A modal ." },
-  { title: "Hover Card", href: "/docs/primitives/hover-card", description: "For sighted users " },
-  { title: "Progress", href: "/docs/primitives/progress", description: "Displays an indicator " },
-  { title: "Scroll-area", href: "/docs/primitives/scroll-area", description: "Visually or semantically separates content." },
-  { title: "Tabs", href: "/docs/primitives/tabs", description: "A set of layered " },
-  { title: "Tooltip", href: "/docs/primitives/tooltip", description: "A popup that displays " },
+  {
+    title: "Alert Dialog",
+    href: "/docs/primitives/alert-dialog",
+    description: "A modal .",
+  },
+  {
+    title: "Hover Card",
+    href: "/docs/primitives/hover-card",
+    description: "For sighted users ",
+  },
+  {
+    title: "Progress",
+    href: "/docs/primitives/progress",
+    description: "Displays an indicator ",
+  },
+  {
+    title: "Scroll-area",
+    href: "/docs/primitives/scroll-area",
+    description: "Visually or semantically separates content.",
+  },
+  {
+    title: "Tabs",
+    href: "/docs/primitives/tabs",
+    description: "A set of layered ",
+  },
+  {
+    title: "Tooltip",
+    href: "/docs/primitives/tooltip",
+    description: "A popup that displays ",
+  },
 ];
 
 export function NavigationMenum() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showSignin, setShowSignin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
-  const [openSubMenus, setOpenSubMenus] = useState<{ [key: string]: boolean }>({});
+  const [openSubMenus, setOpenSubMenus] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const toggleSubMenu = (key: string) => {
     setOpenSubMenus((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -67,26 +93,59 @@ export function NavigationMenum() {
         <div className="flex justify-between h-16 items-center">
           {/* Logo / Brand */}
           <div className="flex-shrink-0 justify-between flex items-center space-x-2">
-            <Image src="/assets/logo.png" alt="Satadiya Logo" width={45} height={40} />
+            <Image
+              src="/assets/logo.png"
+              alt="Satadiya Logo"
+              width={45}
+              height={40}
+            />
             <div>
-              <Link href="/" className="text-lg font-semibold">Satadiya</Link>
+              <Link href="/" className="text-lg font-semibold">
+                Satadiya
+              </Link>
             </div>
           </div>
           {/* Hamburger for mobile and login button */}
           <div className="lg:hidden flex items-center">
-            <button className="mr-3" onClick={()=>setShowSignin(true)}>login</button>
+            <button className="mr-3" onClick={() => setShowSignin(true)}>
+              login
+            </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
               className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             >
               {!mobileOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               )}
             </button>
@@ -102,12 +161,21 @@ export function NavigationMenum() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Home</NavigationMenuTrigger>
                   <NavigationMenuContent className="absolute z-50 top-full left-0 mt-2 min-w-[17rem] max-w-screen-md shadow-lg rounded-md overflow-auto max-h-96">
-                    <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] p-4">
-                      <li className="row-span-3">
+                    <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] p-4 ">
+                      <li className="row-span-3 relative">
                         <NavigationMenuLink asChild>
-                          <Link className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline select-none focus:shadow-md" href="/">
-                            <div className="mt-4 mb-2 text-lg font-medium">Satadiya</div>
-                            <p className="text-muted-foreground text-sm leading-tight">"A step towards digital Gram Swaraj"</p>
+                          <Link
+                            className="relative flex h-full w-full flex-col justify-end rounded-md p-6 no-underline select-none focus:shadow-md
+    bg-cover bg-center bg-[url('/assets/logo.png')]"
+                            href="/"
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-b from-muted/50 to-muted pointer-events-none rounded-md" />
+                            <div className="relative mt-4 mb-2 text-lg font-medium">
+                              Satadiya
+                            </div>
+                            <p className="relative text-muted-foreground text-sm leading-tight">
+                              A step towards digital Gram Swaraj
+                            </p>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -135,15 +203,19 @@ export function NavigationMenum() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink
+                    asChild
+                    className={navigationMenuTriggerStyle()}
+                  >
                     <Link href="/docs">Docs</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <button onClick={() => setShowSignin(true)}>
-                      login
-                    </button>
+                  <NavigationMenuLink
+                    asChild
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    <button onClick={() => setShowSignin(true)}>login</button>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <ModeToggle />
@@ -168,20 +240,31 @@ export function NavigationMenum() {
                     >
                       {title}
                       <svg
-                        className={`h-5 w-5 transform transition-transform duration-200 ${openSubMenus[key] ? "rotate-180" : ""}`}
+                        className={`h-5 w-5 transform transition-transform duration-200 ${
+                          openSubMenus[key] ? "rotate-180" : ""
+                        }`}
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
                       </svg>
                     </button>
                     {openSubMenus[key] && (
                       <ul className="pl-6 mt-1 space-y-1">
                         {submenu.map((item) => (
                           <li key={item.href}>
-                            <Link href={item.href} onClick={closeAll} className="block rounded-md px-3 py-2 text-sm font-normal">
+                            <Link
+                              href={item.href}
+                              onClick={closeAll}
+                              className="block rounded-md px-3 py-2 text-sm font-normal"
+                            >
                               {item.title}
                             </Link>
                           </li>
@@ -190,7 +273,11 @@ export function NavigationMenum() {
                     )}
                   </>
                 ) : (
-                  <Link href={href!} onClick={closeAll} className="block rounded-md px-3 py-2 text-base font-medium ">
+                  <Link
+                    href={href!}
+                    onClick={closeAll}
+                    className="block rounded-md px-3 py-2 text-base font-medium "
+                  >
                     {title}
                   </Link>
                 )}
@@ -202,17 +289,21 @@ export function NavigationMenum() {
 
       {/* SignIn Modal */}
       <Modal isOpen={showSignin} onClose={() => setShowSignin(false)}>
-        <Signin showSignupp={() => {
-          setShowSignin(false);
-          setShowSignUp(true);
-        }} />
+        <Signin
+          showSignupp={() => {
+            setShowSignin(false);
+            setShowSignUp(true);
+          }}
+        />
       </Modal>
       {/* SignUp Modal */}
       <Modal isOpen={showSignUp} onClose={() => setShowSignUp(false)}>
-        <SignUp showSigninn={() => {
-          setShowSignUp(false);
-          setShowSignin(true);
-        }} />
+        <SignUp
+          showSigninn={() => {
+            setShowSignUp(false);
+            setShowSignin(true);
+          }}
+        />
       </Modal>
     </nav>
   );
@@ -229,7 +320,9 @@ function ListItem({
       <NavigationMenuLink asChild>
         <Link href={href} className="block">
           <div className="text-sm leading-none font-medium">{title}</div>
-          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">{children}</p>
+          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+            {children}
+          </p>
         </Link>
       </NavigationMenuLink>
     </li>
