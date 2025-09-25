@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
+import { UserDetailProvider } from "@/context/UserDetailContext";
 
 
 
@@ -21,7 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body>
+      <body >
+        <UserDetailProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -36,6 +38,7 @@ export default function RootLayout({
             </main>
         
          </ThemeProvider>
+          </UserDetailProvider>
       </body>
     </html>
   );

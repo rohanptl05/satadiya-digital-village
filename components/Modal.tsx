@@ -10,39 +10,34 @@ type ModalProps = {
 const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   if (!isOpen) return null;
 
-  
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
-  
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 px-4 sm:px-4 py-6"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleOverlayClick}
-    
     >
-      <div className="relative w-full max-w-lg  rounded-2xl shadow-xl max-h-[90vh] overflow-y-auto p-4 sm:p-6"
+      <div
+        className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl p-6 shadow-xl modal-scroll"
         onClick={e => e.stopPropagation()}
-       
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-black text-xl focus:outline-none transition"
+          className="absolute top-4 right-4 text-gray-500  text-xl focus:outline-none transition"
           aria-label="Close"
         >
           ✖
         </button>
 
         {title && (
-          <h2 className="text-xl font-semibold text-center text-gray-800 mb-4 ">
-            {title}
-          </h2>
+          <h2 className="mb-4 text-center text-xl font-semibold text-gray-800">{title}</h2>
         )}
 
-        <div className="w-full py-7 sm:py-4">{children}</div>
+        <div className=" scrollbar-none">{children}</div>
       </div>
     </div>
   );

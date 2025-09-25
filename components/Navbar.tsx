@@ -89,16 +89,18 @@ export function NavigationMenum() {
 
   return (
     <nav className="relative border-b border-gray-200 overflow-visible">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo / Brand */}
           <div className="flex-shrink-0 justify-between flex items-center space-x-2">
             <Image
+              priority={true}
               src="/assets/logo.png"
               alt="Satadiya Logo"
-              width={45}
-              height={40}
+              width='40'
+              height='40'
             />
+
             <div>
               <Link href="/" className="text-lg font-semibold">
                 Satadiya
@@ -166,7 +168,7 @@ export function NavigationMenum() {
                         <NavigationMenuLink asChild>
                           <Link
                             className="relative flex h-full w-full flex-col justify-end rounded-md p-6 no-underline select-none focus:shadow-md
-    bg-cover bg-center bg-[url('/assets/logo.png')]"
+                                        bg-cover bg-center bg-[url('/assets/logo.png')]"
                             href="/"
                           >
                             <div className="absolute inset-0 bg-gradient-to-b from-muted/50 to-muted pointer-events-none rounded-md" />
