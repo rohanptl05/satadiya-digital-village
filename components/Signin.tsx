@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,12 +30,12 @@ export function Signin({ showSignupp }: { showSignupp: () => void }) {
     throw new Error("SignIn must be used within a UserDetailContext.Provider");
   }
 
-  const handleInputChange =
-    (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (value: string) => {
-      setter(value);
-      if (errorMessage) setErrorMessage(null);
-    };
+  // const handleInputChange =
+  //   (setter: React.Dispatch<React.SetStateAction<string>>) =>
+  //   (value: string) => {
+  //     setter(value);
+  //     if (errorMessage) setErrorMessage(null);
+  //   };
 
   const handleLogin = async () => {
     setErrorMessage(null);
@@ -88,20 +88,27 @@ export function Signin({ showSignupp }: { showSignupp: () => void }) {
 
       setEmail("");
       setPassword("");
-    } catch (error: any) {
-      switch (error.code) {
-        case "auth/user-not-found":
-          setErrorMessage("No account found with this email.");
-          break;
-        case "auth/wrong-password":
-          setErrorMessage("Incorrect password.");
-          break;
-        case "auth/invalid-email":
-          setErrorMessage("Invalid email address.");
-          break;
-        default:
-          setErrorMessage(`Login failed. Please try again. ${error.message}`);
-          break;
+    } catch (error: unknown) {
+      if (typeof error === "object" && error !== null && "code" in error) {
+        const err = error as { code: string; message?: string };
+        switch (err.code) {
+          case "auth/user-not-found":
+            setErrorMessage("No account found with this email.");
+            break;
+          case "auth/wrong-password":
+            setErrorMessage("Incorrect password.");
+            break;
+          case "auth/invalid-email":
+            setErrorMessage("Invalid email address.");
+            break;
+          default:
+            setErrorMessage(
+              `Login failed. Please try again. ${err.message ?? ""}`
+            );
+            break;
+        }
+      } else {
+        setErrorMessage("An unknown error occurred during login.");
       }
     }
   };
@@ -141,11 +148,16 @@ export function Signin({ showSignupp }: { showSignupp: () => void }) {
                   Forgot your password?
                 </a>
               </div>
-              <Input id="password" type="password" required  onChange={(e) => setPassword(e.target.value)}/>
+              <Input
+                id="password"
+                type="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-             {errorMessage && (
-          <p style={{ color: "red", marginBottom: 10 }}>{errorMessage}</p>
-        )}
+            {errorMessage && (
+              <p style={{ color: "red", marginBottom: 10 }}>{errorMessage}</p>
+            )}
           </div>
         </form>
       </CardContent>

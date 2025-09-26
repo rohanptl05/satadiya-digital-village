@@ -126,20 +126,27 @@ function SignUp({ showSigninn }: { showSigninn: () => void }) {
       );
 
       router.push("/");
-    } catch (error: any) {
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          setErrorMessage("This email is already registered.");
-          break;
-        case "auth/invalid-email":
-          setErrorMessage("Invalid email address.");
-          break;
-        case "auth/weak-password":
-          setErrorMessage("Password should be at least 6 characters.");
-          break;
-        default:
-          setErrorMessage(`Signup failed. Please try again. ${error.message}`);
-          break;
+    } catch (error: unknown) {
+      if (typeof error === "object" && error !== null && "code" in error) {
+        const err = error as { code: string; message?: string };
+        switch (err.code) {
+          case "auth/email-already-in-use":
+            setErrorMessage("This email is already registered.");
+            break;
+          case "auth/invalid-email":
+            setErrorMessage("Invalid email address.");
+            break;
+          case "auth/weak-password":
+            setErrorMessage("Password should be at least 6 characters.");
+            break;
+          default:
+            setErrorMessage(
+              `Signup failed. Please try again. ${err.message ?? ""}`
+            );
+            break;
+        }
+      } else {
+        setErrorMessage("An unknown error occurred during signup.");
       }
     } finally {
       setLoading(false);
